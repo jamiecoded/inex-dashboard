@@ -1,52 +1,42 @@
-# InEx 📊
+<div align="center">
+  <img src="public/logo.png" alt="InEx Logo" width="160" />
+  <h1>InEx Dashboard</h1>
+  <p><strong>Income & Expense Financial Monitoring Engine</strong></p>
+  
+  <a href="https://inex-dashboard.vercel.app/" target="_blank">
+    <img src="https://img.shields.io/badge/Live_Demo-inex--dashboard.vercel.app-2ec4b6?style=for-the-badge&logo=vercel" alt="Live Demo" />
+  </a>
+</div>
 
-InEx is a modern, fully responsive financial dashboard application designed to give users comprehensive insights into their spending, income, and overall transaction footprint.
+<br />
 
-![InEx Dashboard](https://github.com/jamiecoded/inex-dashboard/assets/placeholder.png)
+**InEx** (Income-Expense) is a powerful, fully-responsive financial dashboard designed to grant users total visibility into their monetary footprint. Engineered with Next.js and animated natively via Framer Motion, it translates raw transaction data into clean, actionable, and visually stunning intelligence.
 
-## Features 🚀
+## 🧭 Application Structure
 
-- **Liquid Responsive Design**: The entire layout is structured with zero layout shifts from ultra-narrow smartphones (`320px`) up to ultrawide desktops (`2560px`). 
-- **Dynamic Dashboard Metrics**: Calculate realtime `Total Balance`, `Income`, and `Expenses` tracked over dynamically generated datasets.
-- **Deep Category Insights**: Granular visual breakdowns of expenditures parsed into distinct actionable categories (Housing, Utilities, Food) powered by Framer Motion chart animations.
-- **Reporting Generator**: Export your data metrics through a native mobile-friendly report carousel configuration toolbar.
-- **Dark Mode Aesthetic**: Curated glass-morphism dark modes integrating subtle vibrant highlights prioritizing pure black aesthetics with highly accessible `#2ec4b6` interaction tones.
+The platform is divided into highly specialized data-visualization routes:
 
-## Technologies Used 💻
+### 1. Overview Dashboard (`/`)
+The command center. Instantly view your overall metrics (Total Balance, active Income, and total Expenses) parsed elegantly through animated StatCards, a 30-day chronological bar chart pulse, and your most recent critical transactions all in one screen. 
 
-- **Framework**: [Next.js](https://nextjs.org/) (React 18 app directory)
-- **Styling**: Vanilla CSS Variables & TailwindCSS v4 with advanced clamp() fluid typography.
-- **Database / State**: React Context API managing complex cross-route transaction sets.
-- **Micro-Animations**: Framer Motion for liquid-smooth modal transitions, drawer toggles, and StatCard entrance effects.
-- **Icons**: Lucide React optimized scalable vectors.
+### 2. Transactions Control (`/transactions`)
+A high-performance transaction ledger. Features complete multi-parameter filtering, custom chronological sorting, category tag tracking, and deep search capabilities. Powered by a responsive horizontal-scroll interface guaranteeing zero layout breakage across desktop and mobile.
 
-## Installation & Local Setup ⚙️
+### 3. Insights Engine (`/insights`)
+Deep data breakdown. This automated analysis hub calculates your net savings rate, isolates your highest-spending categories, tracks recurring vendors, and flags transactional anomalies against your 90-day rolling averages using intelligent comparative metrics.
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/jamiecoded/inex-dashboard.git
-   cd inex-dashboard
-   ```
+### 4. Categories Matrix (`/categories`)
+The architecture of your spending. Monitor precisely where your money flows with granular visual breakdowns, specific color-coded tags mapped to dynamic donut charts, and automated budget allocation warnings.
 
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
+### 5. Report Generator (`/reports`)
+Your export pipeline. A dynamic, structured configuration tool allowing you to rapidly compile user-defined date ranges and custom category filters into accessible analytical summaries or structured external CSVs.
 
-3. **Run the development server:**
-   ```bash
-   npm run dev
-   ```
+## ⚡ Tech Stack
 
-4. **Open in browser:**
-   Navigate to [http://localhost:3000](http://localhost:3000)
+*   **Core:** React 19 / Next.js 15 (App Router)
+*   **Styling Structure:** TailwindCSS v4 with advanced Fluid Clamp Typography
+*   **Motion Matrix:** Framer Motion (liquid modal & layout transitions)
+*   **Deployment Environment:** Vercel Global Edge Network
 
-## Mobile Considerations 📱
-
-InEx was explicitly redesigned mobile-first focusing on avoiding flex-wrappers and utilizing purely horizontal hidden scroll carousels for extreme filtering and menu interactions. Grids are cleanly forced into 1-col limits in any bound under `640px`.
-
-## Contributors
-* Application architecture completely reconstructed and deployed by AI pair programming.
-
----
-*Created with ♥️ for modern UI/UX workflows.*
+## 📐 Responsive Infrastructure
+InEx utilizes a completely responsive fluid `clamp()` formula enforcing aggressive zero-layout shifts. Grids gracefully collapse, interactive toolbars convert into hidden touch-carousels, and headers utilize absolute responsive padding ensuring pixel-perfect harmony from 320px smartphones up to multi-monitor ultrawide displays.

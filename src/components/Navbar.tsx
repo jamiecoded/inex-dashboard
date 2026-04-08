@@ -1,6 +1,7 @@
 "use client";
 
 import { Bell } from "lucide-react";
+import Image from "next/image";
 import { useAppContext } from "@/context/AppContext";
 import { Role } from "@/types";
 
@@ -10,12 +11,8 @@ export function Navbar() {
   return (
     <header className="flex justify-between items-center w-full py-8 px-[clamp(1rem,3vw,2.5rem)]">
       {/* Mobile Title */}
-      <div className="md:hidden flex items-center gap-2 pl-[4.5rem]">
-        <div className="relative w-5 h-5">
-          <div className="absolute inset-0 bg-accent rounded-full opacity-80 mix-blend-screen" />
-          <div className="absolute top-1 left-1 w-5 h-5 bg-accent rounded-full opacity-60 mix-blend-screen" />
-        </div>
-        <span className="font-bold text-lg tracking-tight">InEx</span>
+      <div className="md:hidden flex items-center pl-[4.5rem]">
+        <Image src="/logo.png" alt="InEx Dashboard" width={110} height={36} className="object-contain" />
       </div>
 
       <div className="flex items-center gap-[clamp(0.5rem,2vw,1.5rem)] ml-auto">

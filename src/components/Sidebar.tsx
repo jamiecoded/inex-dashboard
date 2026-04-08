@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useAppContext } from "@/context/AppContext";
 import { Menu, X } from "lucide-react";
@@ -103,12 +104,8 @@ export function Sidebar() {
           "md:sticky md:top-0 md:translate-x-0 md:bg-background/50"
         )}
       >
-        <div className="flex items-center gap-3 mb-12 ml-10 md:ml-0">
-          <div className="relative w-6 h-6">
-            <div className="absolute inset-0 bg-accent rounded-full opacity-80 mix-blend-screen" />
-            <div className="absolute top-1 left-1.5 w-6 h-6 bg-accent rounded-full opacity-60 mix-blend-screen" />
-          </div>
-          <span className="font-bold text-xl tracking-tight">InEx</span>
+        <div className="flex items-center mb-12 ml-6 md:ml-0">
+          <Image src="/logo.png" alt="InEx Dashboard" width={110} height={36} className="object-contain" priority />
         </div>
 
       <nav className="flex-1 space-y-8">
