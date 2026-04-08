@@ -1,7 +1,7 @@
 <div align="center">
   <img src="public/logo.png" alt="InEx Logo" width="160" />
   <h1>InEx Dashboard</h1>
-  <p><strong>Income & Expense Financial Monitoring Engine</strong></p>
+  <p><strong>Income & Expense Financial Dashboard</strong></p>
   
   <a href="https://inex-dashboard.vercel.app/" target="_blank">
     <img src="https://img.shields.io/badge/Live_Demo-inex--dashboard.vercel.app-2ec4b6?style=for-the-badge&logo=vercel" alt="Live Demo" />
