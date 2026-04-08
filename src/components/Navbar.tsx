@@ -15,7 +15,7 @@ export function Navbar() {
           <div className="absolute inset-0 bg-accent rounded-full opacity-80 mix-blend-screen" />
           <div className="absolute top-1 left-1 w-5 h-5 bg-accent rounded-full opacity-60 mix-blend-screen" />
         </div>
-        <span className="font-bold text-lg tracking-tight">FinTrack</span>
+        <span className="font-bold text-lg tracking-tight">InEx</span>
       </div>
 
       <div className="flex items-center gap-[clamp(0.5rem,2vw,1.5rem)] ml-auto">

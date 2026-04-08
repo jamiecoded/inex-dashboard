@@ -108,7 +108,7 @@ export function Sidebar() {
             <div className="absolute inset-0 bg-accent rounded-full opacity-80 mix-blend-screen" />
             <div className="absolute top-1 left-1.5 w-6 h-6 bg-accent rounded-full opacity-60 mix-blend-screen" />
           </div>
-          <span className="font-bold text-xl tracking-tight">FinTrack</span>
+          <span className="font-bold text-xl tracking-tight">InEx</span>
         </div>
 
       <nav className="flex-1 space-y-8">

@@ -55,7 +55,7 @@ function appReducer(state: AppState, action: AppAction): AppState {
   
   if (typeof window !== "undefined") {
     try {
-      localStorage.setItem("fintrack_state", JSON.stringify(newState));
+      localStorage.setItem("inex_state", JSON.stringify(newState));
     } catch (err) {
       console.error(err);
     }
@@ -75,7 +75,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     try { 
       if (typeof window !== "undefined") {
-        const saved = localStorage.getItem("fintrack_state");
+        const saved = localStorage.getItem("inex_state");
         if (saved) {
           const parsed: AppState = JSON.parse(saved);
         // If saved state has no transactions fall back to initialTransactions
@@ -104,7 +104,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       console.error("Hydration failed", err);
       // If localStorage is corrupt, clear it so we start fresh next time
       if (typeof window !== "undefined") {
-        localStorage.removeItem("fintrack_state");
+        localStorage.removeItem("inex_state");
       }
     }
   }, []);

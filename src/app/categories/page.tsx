@@ -49,7 +49,7 @@ const fmt = (v: number) =>
     maximumFractionDigits: 0,
   }).format(v);
 
-const LS_KEY = "fintrack_categories";
+const LS_KEY = "inex_categories";
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 export default function CategoriesPage() {

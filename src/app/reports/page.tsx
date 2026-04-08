@@ -473,7 +473,7 @@ export default function ReportsPage() {
     if (!reportData) return;
     const { startDate, endDate, openingBalance, closingBalance, totalIncome, totalExpenses, generatedAt, txns } = reportData;
 
-    let csv = `# FinTrack Financial Report\n`;
+    let csv = `# InEx Financial Report\n`;
     csv += `# Period: ${fmtDate(startDate.toISOString().split("T")[0])} - ${fmtDate(endDate.toISOString().split("T")[0])}\n`;
     csv += `# Generated: ${generatedAt}\n#\n`;
     csv += `# SUMMARY\n`;
@@ -494,7 +494,7 @@ export default function ReportsPage() {
     const url = URL.createObjectURL(blob);
     const el = document.createElement("a");
     el.href = url;
-    el.download = `fintrack-report-${startDate.toISOString().split("T")[0]}-${endDate.toISOString().split("T")[0]}.csv`;
+    el.download = `inex-report-${startDate.toISOString().split("T")[0]}-${endDate.toISOString().split("T")[0]}.csv`;
     el.click();
     URL.revokeObjectURL(url);
   };
@@ -525,7 +525,7 @@ export default function ReportsPage() {
     const url = URL.createObjectURL(blob);
     const el = document.createElement("a");
     el.href = url;
-    el.download = `fintrack-report-${startDate.toISOString().split("T")[0]}-${endDate.toISOString().split("T")[0]}.json`;
+    el.download = `inex-report-${startDate.toISOString().split("T")[0]}-${endDate.toISOString().split("T")[0]}.json`;
     el.click();
     URL.revokeObjectURL(url);
   };
@@ -737,7 +737,7 @@ export default function ReportsPage() {
                       <div className="flex items-start justify-between">
                         <div>
                           <h2 className="text-[clamp(1.125rem,2vw+0.5rem,1.35rem)] font-semibold tracking-tight text-[#2ec4b6]">
-                            FinTrack
+                            InEx
                           </h2>
                           <p className="text-[clamp(0.875rem,1.2vw+0.5rem,1.05rem)] text-[#9ca3af]">Financial Report</p>
                         </div>
