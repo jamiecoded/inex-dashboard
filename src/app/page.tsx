@@ -1,65 +1,147 @@
-import Image from "next/image";
+"use client";
+
+import { motion } from "framer-motion";
+import { Sidebar } from "@/components/Sidebar";
+import { Navbar } from "@/components/Navbar";
+import { StatCard } from "@/components/StatCard";
+import { BarChart } from "@/components/BarChart";
+import { DonutChart } from "@/components/DonutChart";
+import { RecentTable } from "@/components/RecentTable";
+import { useAppContext } from "@/context/AppContext";
+import { useMemo } from "react";
 
 export default function Home() {
+  const { state } = useAppContext();
+  const { transactions } = state;
+
+  const now = new Date();
+
+  const currentMonthTxns = useMemo(
+    () =>
+      transactions.filter((t) => {
+        const d = new Date(t.date);
+        return (
+          d.getMonth() === now.getMonth() &&
+          d.getFullYear() === now.getFullYear()
+        );
+      }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [transactions]
+  );
+
+  const totalIncome = useMemo(
+    () =>
+      currentMonthTxns
+        .filter((t) => t.type === "credit")
+        .reduce((sum, t) => sum + t.amount, 0),
+    [currentMonthTxns]
+  );
+
+  const totalExpenses = useMemo(
+    () =>
+      currentMonthTxns
+        .filter((t) => t.type === "debit")
+        .reduce((sum, t) => sum + t.amount, 0),
+    [currentMonthTxns]
+  );
+
+  const totalBalance = useMemo(
+    () =>
+      transactions.reduce(
+        (sum, t) => (t.type === "credit" ? sum + t.amount : sum - t.amount),
+        0
+      ),
+    [transactions]
+  );
+
+  const lastMonthExpenses = useMemo(() => {
+    const lastMonth = now.getMonth() === 0 ? 11 : now.getMonth() - 1;
+    const lastYear =
+      now.getMonth() === 0 ? now.getFullYear() - 1 : now.getFullYear();
+    return transactions
+      .filter((t) => {
+        const d = new Date(t.date);
+        return (
+          t.type === "debit" &&
+          d.getMonth() === lastMonth &&
+          d.getFullYear() === lastYear
+        );
+      })
+      .reduce((sum, t) => sum + t.amount, 0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [transactions]);
+
+  const expenseDelta = useMemo(() => {
+    if (lastMonthExpenses === 0) return 0;
+    return Math.round(
+      ((totalExpenses - lastMonthExpenses) / lastMonthExpenses) * 100
+    );
+  }, [totalExpenses, lastMonthExpenses]);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="flex min-h-[100svh] w-full">
+      <Sidebar />
+      <div className="flex-1 flex flex-col min-w-0 w-full relative">
+        <Navbar />
+        <main className="flex-1 px-[clamp(1rem,3vw,2.5rem)] pb-20 mt-20 md:mt-4 max-w-[1280px] mx-auto w-full">
+          <motion.header
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="mb-12 relative"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+            <div className="absolute -top-20 left-40 w-64 h-64 bg-accent opacity-[0.03] blur-[100px] pointer-events-none" />
+            <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-4">
+              Good morning,
+              <br />
+              Jay
+            </h1>
+            <p className="text-muted tracking-wide text-sm md:text-base">
+              {now.toLocaleDateString("en-US", {
+                weekday: "long",
+                month: "long",
+                day: "numeric",
+                year: "numeric",
+              })}
+            </p>
+          </motion.header>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-[clamp(1rem,2vw,1.5rem)] mb-6">
+            <StatCard
+              title="TOTAL BALANCE"
+              value={totalBalance}
+              subtext="ALL TIME"
+              variant="accent"
+              trendUp={totalBalance >= 0}
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+            <StatCard
+              title="INCOME"
+              value={totalIncome}
+              subtext="THIS MONTH"
+              variant="light"
+              trendUp={true}
+            />
+            <StatCard
+              title="EXPENSES"
+              value={totalExpenses}
+              subtext={
+                expenseDelta === 0
+                  ? "THIS MONTH"
+                  : `${expenseDelta > 0 ? "▲" : "▼"} ${Math.abs(expenseDelta)}% VS LAST MONTH`
+              }
+              variant="dark"
+              trendUp={expenseDelta <= 0}
+            />
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-[clamp(1rem,2vw,1.5rem)] mb-6">
+            <BarChart />
+            <DonutChart />
+          </div>
+
+          <RecentTable />
+        </main>
+      </div>
     </div>
   );
 }
